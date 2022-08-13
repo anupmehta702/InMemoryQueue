@@ -27,7 +27,8 @@ public class ProducerBarrier {
     public int addEvent(QueueEvent event) throws InterruptedException {
         int currentIndex = getValidIndexToWriteOn();
         while (!ringBuffer.addEvent(event, currentIndex)) {
-            System.out.println("Failed while adding event for currentIndex -->" + currentIndex + " , Retrying !");
+            System.out.println("Failed while adding event for currentIndex -->" + currentIndex + " " +
+                    ", Retrying to obtain atomic lock !");
             Thread.sleep(3000);
             currentIndex = getValidIndexToWriteOn();
 
